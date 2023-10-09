@@ -75,7 +75,7 @@
 
 - Motivation includes a data structure where we can efficiently search for any element in the data structure given some sort of key
 - DATs are arrays where elements are placed in the same index as their key
-- A limitation of DATs are that it does not use memory efficiently (i.e. if a key in the DAT is way larger than the rest of the elements, it will require a larger array to accommodate the large key, resulting in many empty cells and wasted space)
+- A limitation of DATs are that it does not use memory efficiently (i.e. if there is a key way larger than the rest of the elements or the range of keys is large and there aren't many values in between the largest and smallest values, it will require a larger array to fit every element in the table, resulting in many empty cells and wasted space)
 
 ### Hash Table
 
@@ -86,6 +86,7 @@
     - Hashing: the process of mapping keys to hash values
     - Hash table/Bucket array: the array that holds all the keys after being hashed
 - Collisions are when multiple keys get hashed to the same index
+- Two ways of dealing with collisions: separate chaining and open addressing
 
 #### Separate Chaining
 
