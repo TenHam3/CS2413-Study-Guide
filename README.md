@@ -181,26 +181,32 @@ Example of double hashing:
 
 #### Property 1
 
-- The upper bound can be proven by observing that each level has $2^h$ nodes in them where h is the height of that node. Summing all nodes up makes $2^0 + 2^1 + ... + 2^h$ where h is the height of the entire tree. We can call this sum S. Multiplying it by 2 and subtracting S from 2S gives $2^{h + 1} - 1$ and that is why the upper bound is $2^{h + 1} - 1$.
+- The upper bound can be proven by observing that each level has $2^h$ nodes in them where h is the height of that node. Summing all nodes up makes $2^0 + 2^1 + ... + 2^h$ where h is the height of the entire tree. We can call this sum S. Multiplying it by 2 and subtracting S from 2S gives $S = 2^{h + 1} - 1$ and that is why the upper bound is $2^{h + 1} - 1$.
 - The lower bound can be proven by observing that each level can have a minimum of 1 node each, so at any given height h, the tree can have a minimum of h nodes + the root node so the lower bound for how many nodes there are in the tree, n, is h + 1.
 
 #### Property 4
 
-- The lower bound, which is the height of the shortest binary tree we can build to store n nodes is $\log{(n + 1)} - 1$. This is because the shortest binary tree is achieved when we have a full and complete binary tree, that is, every level of the binary tree is filled with nodes. This means that the number of nodes, n, is equal to the maximum number of nodes it can be for a given binary tree with height h, which is $2^{h + 1} - 1$. Adding 1 to both sides, then taking the logarithm of both sides yields $\log{(n + 1)} = h + 1$. Subtracting 1 from both sides gives us the minimum height of a binary tree with the given number of nodes n, which is $h = \log{(n + 1)} - 1$.
-- The upper bound is achieved when each node only has 1 child, effectively resulting in a singly linked list of nodes. This happens when the tree has the minimum number of nodes, n, at height h, which is h + 1. Solving for h by subtracting 1 from both sides gives h $\leq$ n - 1.
+- The lower bound, which is the height of the shortest binary tree we can build to store n nodes, is $\log{(n + 1)} - 1$. This is because the shortest binary tree is achieved when we have a perfectly full and complete binary tree, that is, every level of the binary tree is filled with nodes. This means that the number of nodes, n, is equal to the maximum number of nodes it can be for a given binary tree with height h, which is $2^{h + 1} - 1$. Adding 1 to both sides, then taking the logarithm of both sides yields $\log{(n + 1)} = h + 1$. Subtracting 1 from both sides gives us the minimum height of a binary tree with the given number of nodes n, which is $h = \log{(n + 1)} - 1$.
+- The upper bound is achieved when each node only has 1 child, effectively resulting in a singly linked list of nodes. This happens when the tree has the minimum number of nodes, n, at height h, which is h + 1. Solving for h by subtracting 1 from both sides gives $h \leq n - 1$.
 
 ![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/731f5677-6169-41ed-9066-dd563fa93f02)
 
 - This property can be proven by observing a simple proper binary tree of 3 nodes. The number of external nodes in this tree would be 2 and the number of internal nodes is 1. Whenever you add two more nodes as children to another node, the external node becomes an internal node, adding 1 to the number of internal nodes and subtracting 1 from the number of external nodes. However, you then add 2 to the number of external nodes because the two newly added nodes are external so in this process, both internal and external nodes only increase by 1, preserving the property.
+      - You have to add two nodes per insertion because it has to preserve the full tree property of each node having either 0 or 2 nodes. If you add only 1 node as a child to a leaf node, then it is no longer a full/proper tree and the property doesn't apply.
 
 #### Property 2 and 3
 
-- Since the number of total nodes n, is equal to $n_i + n_e$, where $n_i$ is the number of internal nodes and $n_e$ is the number of external nodes, then you can use Property 1 and the previous property to derive the last two properties relating the number of internal/external nodes to the height
+- Since the number of total nodes n, is equal to $n_i + n_e$, where $n_i$ is the number of internal nodes and $n_e$ is the number of external nodes, then you can use Property 1 and the previous property to derive the upper bounds of the Properties 2 and 3 relating the number of internal/external nodes to the height.
+- The lower bound for the number of external nodes is simply 1 since in a tree where the minimum number of nodes is h + 1, there is only 1 external node, which is the tail of the linked list.
+- The lower bound for the number of internal nodes is h because in the tree where the minimum number of nodes is h, there are h nodes with children, meaning there are h internal nodes. You can also observe that if there is a minimum of 1 external nodes in a tree and the minimum number of total nodes in a tree is h + 1, then you can get the number of internal nodes by doing the following:
+- $n = n_e + n_i$
+- $h + 1 = 1 + n_i$
+- $n_i = h$ 
 
 #### Proof of Parent-Child Index Relationship
 
 - If you have the rth node of a given depth h, you can find its index and its childrens' indices
-- First, you can use Property 1 to see how many total nodes there are in the previous levels and this would be the same as the index of the last node in the previous level. This would be $2^{h - 1 + 1} - 1 = 2^h - 1$, where h still represents the depth of the given node. If the given node is the rth node in the level, then you can travel r times after the last node of the previous level to get to the index of the desired node. This means the rth node is at index $2^h - 1 + r$. To find the indices of its children, you can apply Property 1 again, but this time at depth h instead of h - 1 to get to the index of the last node at height h. This would be $2^{h + 1} - 1$. Because the parent is the rth node in its level and there are r - 1 nodes before it in its level and each node has to have 2 children since it is a complete tree, there are $2(r - 1)$ nodes in the next level before the left child. This means that the left child will be at index $2^{h + 1} - 1 + 2(r - 1) + 1 = 2^h + 2r - 2 = 2(2^h + r - 1)$. Since the parent node is at index $2^h + r - 1$, we can label that as index i and therefore the left child will be at index 2i. This also means the right child will be at the next index, which is 2i + 1.  
+- First, you can use Property 1 to see how many total nodes there are in the previous levels and this would be the same as the index of the last node in the previous level. This would be $2^{h - 1 + 1} - 1 = 2^h - 1$, where h still represents the depth of the given node. If the given node is the rth node in the level, then you can travel r times after the last node of the previous level to get to the index of the desired node. This means the rth node is at index $2^h - 1 + r$. To find the indices of its children, you can apply Property 1 again, but this time at depth h instead of h - 1 to get to the index of the last node at height h. This would be $2^{h + 1} - 1$. Because the parent is the rth node in its level and there are r - 1 nodes before it in its level and each node has to have 2 children since it is a complete tree, there are $2(r - 1)$ nodes in the next level before the left child. This means that the left child will be at index $2^{h + 1} - 1 + 2(r - 1) + 1 = 2^{h + 1} + 2r - 2 = 2(2^h + r - 1)$. Since the parent node is at index $2^h + r - 1$, we can label that as index i and therefore the left child will be at index 2i. This also means the right child will be at the next index, which is 2i + 1.  
 
 ## Topic 6: Binary Search Tree
 
@@ -232,5 +238,4 @@ Example of double hashing:
 
 - BST search efficiency depends on the height since you would have to travel down the entire tree in the worst case scenario
 - This makes search more efficient on more balanced trees where they are complete and full, meaning that it is at its minimum height
-- This also means that search is less efficient on BSTs that are essentially singly linked lists, where there is only one path and the height is equal to the number of nodes - 1. 
-    - 
+- This also means that search is less efficient on BSTs that are essentially singly linked lists, where there is only one path and the height is equal to the number of nodes - 1
