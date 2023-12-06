@@ -40,6 +40,13 @@
 - Dynamicaly allocated memory is stored in the heap
 - When you dynamically allocate memory, it always returns a pointer to the object or data type that is dynamically allocated
 - To "delete" a memory chunk means freeing the memory chunk for other variables to use in the future, but does not mean erasing the data currently there. Cannot access this data through the pointer when deleted. Data is still technically there in the memory chunk until it gets overwritten later on.
+- 
+
+### Memory Used by Functions
+- Functions take memory in the stack each time they are called
+    - This means recursive functions will take more space in the stack memory since multiple function calls will be stored in the stack until the base case is reached and function calls start completing and getting popped off the stack
+- Any variables declared in the function will stay in the same memory location, even if the function is called multiple times in separate instances in the code
+    - If a function declares in integer variable and initializes it to a given integer argument, the same memory location will be occupied by the integer declared in the function and thus any changes to the variable, even by later function calls, will reflect on the same integer from that memory location
 
 ## Topic 2: Linked List
 
@@ -52,6 +59,7 @@
 ### Doubly Linked List
 
 - Efficiency for adding to head vs adding to tail is the same for doubly linked list since you have a pointer to both the head and tail in a doubly linked list
+- In general, adding is more efficient on doubly linked lists than it is singly linked lists because of the tail pointer from the doubly linked list, allowing for not only O(1) adding for the head, but also the tail whereas the time complexity for adding to the tail of a singly linked list is O(n)
 
 ### Circular Linked List
 
@@ -68,6 +76,7 @@
     - The front of the queue is represented by the tail of the linked list
     - The back of the queue is represented by the head of the linked list
 - Queues can be applied for the breadth-first search algorithm
+- Pop only removes the element from the top of the stack/front of the queue and does not return the element being popped off (void return type)
 
 ## Topic 4: Hash Tables
 
@@ -86,7 +95,15 @@
     - Hashing: the process of mapping keys to hash values
     - Hash table/Bucket array: the array that holds all the keys after being hashed
 - Collisions are when multiple keys get hashed to the same index
+    - When keys get hashed to an occupied cell during a probing process, these are not collisions and should not be counted when counting the number of collisions for adding a sequence of keys
 - Two ways of dealing with collisions: separate chaining and open addressing
+- Load factor: $\lambda = \frac{n}{N}$
+    - n is the number of objects stored in the table
+    - N is the size of the table
+    - Range of $\lambda$ for separate chaining is [0, $\infty$] because extra objects are stored outside the table, which means for a finite table size N, there could theoretically be possibly infinite objects n stored outside the table
+    - Range of $\lambda$ for open addressing is [0, 1] because all objects are stored inside the table
+    - We want a hash table to have a small $\lambda$ to gain efficiency and have guarantees such as
+          - quadratic probing is guaranteed to find an empty cell if $\lambda < 0.5$ (+ other assumptions) 
 
 #### Separate Chaining
 
@@ -113,11 +130,15 @@ Example of double hashing:
 ![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/14226bc4-e72c-4ce2-9c89-f0460a9528b2)
 
 - Limitations of linear probing: a limitation is primary clustering, where a large number of collided objects end up being stored contiguously in the array so that there is a large cluster of objects that were hashed to the same index, lowering the add and search efficieny of objects hashed to these cells
+      - Also theoretically suffers from secondary clustering because the probing sequence is the same for a large number of collided objects
 - Limitations of quadratic probing: quadratic probing has two limitations
   1. It is not guaranteed to find an empty cell even if one exists in the hash table. It is only guaranteed if
      - Table size is a prime number
      - Table is not more than half-filled
   2. It suffers from secondary clustering, where the probing sequence is the same for a large number of collided objects
+ 
+- Limitations of double hashing: double hashing requires extra time for the second hashing and cannot guarantee an empty cell in general
+    - It is also not guaranteed for double hashing to avoid primary or secondary clustering, just avoids them in general but not always
  
 - Extra indicators such as an additional array can help probing efficiency by marking how many collisions occur at each cell. Trades space efficiency for time efficiency.
 - You need to resize the hash table if it becomes full or half full if using quadratic probing
@@ -232,11 +253,108 @@ Example of double hashing:
 
 ### Connection Between BST and Binary Search
 
-- Binary search has a corresponding BST that would have the same search sequence
-- Both can search efficiently in the same time because they have the same search sequence
+- Binary search has a corresponding BST that would have the same search sequence on the same data set
+- Both can search efficiently in the same time because they have the same search sequence (assuming the BST is balanced)
+- In general, performing standard search on BST is not as efficient as performing binary search on an array because more often than not, a BST of a given data set will not be balanced
+    - Ex: If adding the integers 1, 2, and 3 as a BST, there are 6 permutations for adding them in a particular order
+    - 4 out of the 6 permutations are unbalanced because 2 start with 1 and every node after would be in its right subtree and 2 start with 3 and every node after would be in its left subtree. Both of these would be unbalanced because it is a single-branch/single-child tree
 
 ### Comparative Efficiency of Different BST Structures
 
 - BST search efficiency depends on the height since you would have to travel down the entire tree in the worst case scenario
 - This makes search more efficient on more balanced trees where they are complete and full, meaning that it is at its minimum height
 - This also means that search is less efficient on BSTs that are essentially singly linked lists, where there is only one path and the height is equal to the number of nodes - 1
+
+## Time and Space Complexity
+
+- Complexities usually depend on n, or the number of elements in the data structure
+- For space complexity, there are two conventions:
+    - Including the input space in the space complexity analysis
+    - Not including the input space in the space complexity analysis
+    - For this study guide, assume we are not including input space
+- Three notations for time and space complexity:
+    - Big O: upper bound that describes the complexity in the worst-case scenario
+    - Big $\omega$: lower bound that describes the complexity in the best-case scenario
+    - Big $\theta$: both bounds that describes a function that can act both as an upper or lower bound for the complexity (usually the same as Big O since you can always scale the Big O function down to where it is a lower bound for the complexity)
+ 
+- How to analyze:
+    - List out all operations that take constant time to execute (or all variables/function calls that take space for space complexity)
+    - Identify the worst-case scenario
+    - Measure the total time/space in the worst-case scenario by identifying each step's dependence on n and gathering like terms
+    - Process the total time by identifying the dominant term in the complexity and choosing that as the function for the complexity
+ 
+Ex: 
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/1581641c-825c-4db0-a874-f1cedb4b2034)
+
+### Linked List
+
+#### Time Complexity
+
+- Search
+    - Singly: O(n), $\omega$(1)
+    - Doubly: O(n), $\omega$(1)
+ 
+- Adding to head
+    - Singly: O(1), $\omega$(1)
+    - Doubly: O(1), $\omega$(1)
+ 
+- Adding to tail
+    - Singly: O(n) $\omega$(n) (Could be classified as $\omega$(1) if you consider the case where the list is either one node or empty as a constant time operation)
+    - Doubly: O(1), $\omega$(1)
+ 
+- Removing from head
+    - Singly: O(1), $\omega$(1)
+    - Doubly: O(1), $\omega$(1)
+ 
+- Removing from tail
+    - Singly: O(n), $\omega$(n) (Same as adding to tail where it could be $\omega$(1))
+    - Doubly: O(1), $\omega$(1)
+
+#### Space Complexity
+
+- Storing n nodes
+    - Singly: O(n), $\omega$(n)
+    - Doubly: O(n), $\omega$(n)
+- Search
+    - Singly: O(1), $\omega$(1) (Only a temp pointer is declared in the algorithm, constant memory)
+    - Doubly: O(1), $\omega$(1)
+ 
+- Adding to head
+    - Singly: O(1), $\omega$(1)
+    - Doubly: O(1), $\omega$(1)
+ 
+- Adding to tail
+    - Singly: O(1), $\omega$(1) (Only a temp pointer to iterate through the list)
+    - Doubly: O(1), $\omega$(1)
+ 
+- Removing from head
+    - Singly: O(1), $\omega$(1) (Only a temp pointer to save the old head before updating the new head so that you can delete it)
+    - Doubly: O(1), $\omega$(1)
+ 
+- Removing from tail
+    - Singly: O(1), $\omega$(1) (Only a temp pointer to iterate through the list)
+    - Doubly: O(1), $\omega$(1)
+ 
+### Stacks and Queues
+
+#### Time Complexity
+
+- Pushing
+    - Stack: O(1), $\omega$(1) (O(n) for array-based implementation due to the possible resize)
+    - Queue: O(1), $\omega$(1) (Same as array-based stack implementation)
+
+- Popping
+    - Stack: O(1), $\omega$(1)
+    - Queue: O(1), $\omega$(1)
+ 
+- Top/Front
+    - Stack: O(1), $\omega$(1)
+    - Queue: O(1), $\omega$(1)
+
+ #### Space Complexity
+
+ - Storing n objects
+    - Stack: O(n), $\omega$(n)
+    - Queue: O(n), $\omega$(n)
+  
