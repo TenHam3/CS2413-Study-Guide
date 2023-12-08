@@ -274,7 +274,7 @@ Example of double hashing:
     - For this study guide, assume we are not including input space
 - Three notations for time and space complexity:
     - Big O: upper bound that describes the complexity in the worst-case scenario
-    - Big $\omega$: lower bound that describes the complexity in the best-case scenario
+    - Big $\Omega$: lower bound that describes the complexity in the best-case scenario
     - Big $\theta$: both bounds that describes a function that can act both as an upper or lower bound for the complexity (usually the same as Big O since you can always scale the Big O function down to where it is a lower bound for the complexity)
  
 - How to analyze:
@@ -292,69 +292,69 @@ Ex:
 #### Time Complexity
 
 - Search
-    - Singly: O(n), $\omega$(1)
-    - Doubly: O(n), $\omega$(1)
+    - Singly: O(n), $\Omega$(1)
+    - Doubly: O(n), $\Omega$(1)
  
 - Adding to head
-    - Singly: O(1), $\omega$(1)
-    - Doubly: O(1), $\omega$(1)
+    - Singly: O(1), $\Omega$(1)
+    - Doubly: O(1), $\Omega$(1)
  
 - Adding to tail
-    - Singly: O(n) $\omega$(n) (Could be classified as $\omega$(1) if you consider the case where the list is either one node or empty as a constant time operation)
-    - Doubly: O(1), $\omega$(1)
+    - Singly: O(n) $\Omega$(n) (Could be classified as $\Omega$(1) if you consider the case where the list is either one node or empty as a constant time operation)
+    - Doubly: O(1), $\Omega$(1)
  
 - Removing from head
-    - Singly: O(1), $\omega$(1)
-    - Doubly: O(1), $\omega$(1)
+    - Singly: O(1), $\Omega$(1)
+    - Doubly: O(1), $\Omega$(1)
  
 - Removing from tail
-    - Singly: O(n), $\omega$(n) (Same as adding to tail where it could be $\omega$(1))
-    - Doubly: O(1), $\omega$(1)
+    - Singly: O(n), $\Omega$(n) (Same as adding to tail where it could be $\Omega$(1))
+    - Doubly: O(1), $\Omega$(1)
 
 #### Space Complexity
 
 - Storing n nodes
-    - Singly: O(n), $\omega$(n)
-    - Doubly: O(n), $\omega$(n)
+    - Singly: O(n), $\Omega$(n)
+    - Doubly: O(n), $\Omega$(n)
 - Search
-    - Singly: O(1), $\omega$(1) (Only a temp pointer is declared in the algorithm, constant memory)
-    - Doubly: O(1), $\omega$(1)
+    - Singly: O(1), $\Omega$(1) (Only a temp pointer is declared in the algorithm, constant memory)
+    - Doubly: O(1), $\Omega$(1)
  
 - Adding to head
-    - Singly: O(1), $\omega$(1)
-    - Doubly: O(1), $\omega$(1)
+    - Singly: O(1), $\Omega$(1)
+    - Doubly: O(1), $\Omega$(1)
  
 - Adding to tail
-    - Singly: O(1), $\omega$(1) (Only a temp pointer to iterate through the list)
-    - Doubly: O(1), $\omega$(1)
+    - Singly: O(1), $\Omega$(1) (Only a temp pointer to iterate through the list)
+    - Doubly: O(1), $\Omega$(1)
  
 - Removing from head
-    - Singly: O(1), $\omega$(1) (Only a temp pointer to save the old head before updating the new head so that you can delete it)
-    - Doubly: O(1), $\omega$(1)
+    - Singly: O(1), $\Omega$(1) (Only a temp pointer to save the old head before updating the new head so that you can delete it)
+    - Doubly: O(1), $\Omega$(1)
  
 - Removing from tail
-    - Singly: O(1), $\omega$(1) (Only a temp pointer to iterate through the list)
-    - Doubly: O(1), $\omega$(1)
+    - Singly: O(1), $\Omega$(1) (Only a temp pointer to iterate through the list)
+    - Doubly: O(1), $\Omega$(1)
  
 ### Stacks and Queues
 
 #### Time Complexity
 
 - Pushing
-    - Stack: O(1), $\omega$(1) (O(n) for array-based implementation due to the possible resize)
-    - Queue: O(1), $\omega$(1) (Same as array-based stack implementation)
+    - Stack: O(1), $\Omega$(1) (O(n) for array-based implementation due to the possible resize)
+    - Queue: O(1), $\Omega$(1) (Same as array-based stack implementation)
 
 - Popping
-    - Stack: O(1), $\omega$(1)
-    - Queue: O(1), $\omega$(1)
+    - Stack: O(1), $\Omega$(1)
+    - Queue: O(1), $\Omega$(1)
  
 - Top/Front
-    - Stack: O(1), $\omega$(1)
-    - Queue: O(1), $\omega$(1)
+    - Stack: O(1), $\Omega$(1)
+    - Queue: O(1), $\Omega$(1)
 
  #### Space Complexity
 
  - Storing n objects
-    - Stack: O(n), $\omega$(n)
-    - Queue: O(n), $\omega$(n)
+    - Stack: O(n), $\Omega$(n)
+    - Queue: O(n), $\Omega$(n)
   
