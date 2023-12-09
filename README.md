@@ -358,3 +358,43 @@ Ex:
     - Stack: O(n), $\Omega$(n)
     - Queue: O(n), $\Omega$(n)
   
+### Hash Table
+
+#### Time Complexity
+
+- k: largest key
+- m: size of the longest chain, often m = O(n)
+- h: size of the table (not necessarily dependent on n)
+
+- Search
+    - Direct Address Table: O(1), $\Omega$(1) (All keys hashed to the corresponding index of the table)
+    - Separate Chaining that holds nodes: O(m), $\Omega$(1) (Have to traverse the entirety of the longest chain in the worst case)
+    - Separate Chaining that holds pointers: O(m), $\Omega$(1) (Same as the other separate chaining)
+    - Linear probing: O(h), $\Omega$(1) (Have to probe through the entire table in the worst case, even if you encounter an empty cell in the process)
+
+- Adding
+    - Direct Address Table: O(1), $\Omega$(1) 
+    - Separate Chaining that holds nodes: O(1), $\Omega$(1) (Could be O(m) if you add to the list tail instead of list head)
+    - Separate Chaining that holds pointers: O(1), $\Omega$(1) (Same as other separate chaining)
+    - Linear probing: O(h), $\Omega$(1) (In the worst case, the only empty cell is the one above where it's initially hashed, meaning you have to check h total cells when probing for an empty cell to add to)
+ 
+- Removing
+    - Direct Address Table: O(1), $\Omega$(1)
+    - Separate Chaining that holds nodes: O(m), $\Omega$(1) (Have to traverse the longest chain in the worst case)
+    - Separate Chaining that holds pointers: O(m), $\Omega$(1) (Same as other separate chaining)
+    - Linear probing: O(h), $\Omega$(1) (Have to prove through the entire table in the worst case to search for the desired key to be removed)
+ 
+#### Space Complexity
+
+- Storing n nodes
+    - Direct Address Table: O(k), $\Omega$(n) (worst-case is when the largest key is bigger than the number of elements, best-case is when the range of the keys is the same as n)
+    - Separate Chaining that holds nodes: O(n), $\Omega$(n) (Have to store n nodes)
+    - Separate Chaining that holds pointers: O(h + n), $\Omega$(max(h, n)) (Have to store h pointers and n nodes, have to add them both together in the complexity because it is ambiguous whether h or n will be bigger)
+    - Linear Probing: O(h), $\Omega$(h) (Have to allocate space for the entire table, regardless of whether it is full or not)
+ 
+### Binary Search Tree
+
+- Tree Height
+    - List-based: O(n), $\Omega$($\log{_2}{n}$)
+    - Array-based: O(n), $\Omega$($\log{_2}{n}$)
+- Mathematical Derivation of Tree Height
