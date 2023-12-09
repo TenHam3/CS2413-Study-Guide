@@ -394,7 +394,59 @@ Ex:
  
 ### Binary Search Tree
 
+#### Tree Height Complexities
+
 - Tree Height
-    - List-based: O(n), $\Omega$($\log{_2}{n}$)
+    - List-based: O(n), $\Omega$($\log{_2}{n}$) (Worst case is when it is a single child/single branch tree, best case is when it is balanced)
     - Array-based: O(n), $\Omega$($\log{_2}{n}$)
+
 - Mathematical Derivation of Tree Height
+    - A completely full tree has $n = 2^{h + 1} - 1$. Solving for h (Add 1 to both sides, taking the log of both sides, and then subtracting 1 from both sides), you get $h = \log{_2}{n + 1} - 1$
+
+#### Time Complexity
+
+- Search
+    - List-based: O(h), $\Omega$(1) (Worst case is when you have to traverse the entire height of the tree, best case is when the target is at the root)
+    - Array-based: O(h), $\Omega$(1)
+
+- Adding
+    - List-based: O(h), $\Omega$(1) (Worst case is when you have to traverse through the height of the tree, best case is when the root has a missing child and the new node can be added there)
+    - Array-based: O(h), $\Omega$(1)
+
+ - Remove
+    - List-based: O(h), $\Omega$(h) (Have to travel down to the height of removed node, replace it with its inorder predecessor/successor further down the tree and repeat the process until the replacement is a leaf, meaning you have traveled down the full height)
+    - Array-based: O(h), $\Omega$(h)
+
+#### Space Complexity
+
+- Storing n nodes
+    - List-based: O(n), $\Omega$(n)
+    - Array-based: O($2^n$), $\Omega$(n) (Worst case is when the tree is a single branch tree. The index of the last node in the worst case is $2^n - 1$, which means the array size is $2^n$ because you have to add in the zeroth index
+ 
+### AVL
+
+#### Tree Height Complexity
+
+- Tree Height
+    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$) (Heights of left and right subtrees only differ by 1 so it guarantees a balanced tree)
+    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+
+ #### Time Complexity
+
+ - Search
+    - List-based: O($\log{_2}{n}$), $\Omega$(1) (Traverse through the whole height, which is always $\log{_2}{n}$)
+    - Array-based: O($\log{_2}{n}$), $\Omega$(1)
+  
+- Adding
+    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$) (Have to traverse the entire height to add, then traverse back up to the root to check violations)
+    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+
+- Removing
+    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+ 
+#### Space Complexity
+
+- Storing n nodes
+    - List-based: O(n), $\Omega$(n)
+    - Array-based: O($n^2$), $\Omega$(n) (Worst case max index is $2^{h + 1} - 1$ where $h < 2 * \log{_2}{n}$. When plugging in $2 * \log{_2}{n}$ into the max index, you get $2n^2 - 1$ which is O(n^2)
