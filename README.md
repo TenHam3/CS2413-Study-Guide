@@ -568,3 +568,36 @@ Ex:
     - Matrix-based: O(n^2), $\Omega$(n^2)
     - List-based: O(n + m), $\Omega$(n + m) (n is the number of pointers in the table and m is the number of nodes)
  
+### Complexity of Search and Sorting on Array
+
+#### Time Complexity
+
+- Binary Search
+    - O($\log{_2}{n}$
+    - $\Omega$(1)
+
+- Bubble Sort
+    - O($n^2$)
+    - $\Omega$(n)
+
+- Merge Sort
+    - O($n \log{_2}{n}$)
+    - $\Omega$(n \log{_2}{n}$)
+ 
+- Counting Sort
+    - O(n + m) (m is the largest key in the array, have to construct two array of size m and both count whether the i-th element is in the array for the first m-sized array and how many elements before the i-th cell are in the first m-size array for the second m-sized array)
+    - $\Omega$(n + m)
+
+#### Space Complexity
+
+- Bubble Sort
+    - O(1)
+    - $\Omega$(1)
+ 
+- Merge Sort
+    - Operating on Lists: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+    - Operating on Arrays: O(n), $\Omega$(n) (Space complexity of merge phase is O(n) since you create copies of the two halves of the input array that add up to n, the recursive call stack is equal to the height of the decision tree, which is $\log{_2}{n}, so it is O($\log{_2}{n}$). The total complexity is O(n) + O($\log{_2}{n}$) and O(n) dominates so the final space complexity ends up as O(n))
+ 
+- Counting Sort
+    - O(m) (m is the largest key, have to construct two arrays of size m to be able to 1. count how many times the i-th element appears in the input array and 2. count how many elements are in the input array before the i-th cell)
+    - $\Omega$(m)
