@@ -401,7 +401,7 @@ Ex:
     - Array-based: O(n), $\Omega$($\log{_2}{n}$)
 
 - Mathematical Derivation of Tree Height
-    - A completely full tree has $n = 2^{h + 1} - 1$. Solving for h (Add 1 to both sides, taking the log of both sides, and then subtracting 1 from both sides), you get $h = \log{_2}{n + 1} - 1$
+    - A completely full tree has $n = 2^{h + 1} - 1$. Solving for h (Add 1 to both sides, taking the log of both sides, and then subtracting 1 from both sides), you get $h = \log{_2}{(n + 1)} - 1$
 
 #### Time Complexity
 
