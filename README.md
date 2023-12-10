@@ -456,22 +456,22 @@ Ex:
 #### Tree Height Complexity
 
 - Tree Height
-    - List-based: O($\log{_2}{n}), $\Omega$($\log{_2}{n}) 
-    - Array-based: O($\log{_2}{n}), $\Omega$($\log{_2}{n})
+    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$) 
+    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
  
 #### Time Complexity
 
 - Search
-    - List-based: O(h) = O($\log{_2}{n}, $\Omega$(1)
-    - Array-based: O(h) = O($\log{_2}{n}, $\Omega$(1)
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(1)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(1)
 
 - Adding
-    - List-based: O(h) = O($\log{_2}{n}, $\Omega$($\log{_2}{n})
-    - Array-based: O(h) = O($\log{_2}{n}, $\Omega$($\log{_2}{n})
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
 
 - Removing
-    - List-based: O(h) = O($\log{_2}{n}, $\Omega$($\log{_2}{n})
-    - Array-based: O(h) = O($\log{_2}{n}, $\Omega$($\log{_2}{n})
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
 
  #### Space Complexity
  
@@ -490,16 +490,16 @@ Ex:
 #### Time Complexity
 
 - Search
-    - List-based: O(h) = O($\log{_2}{n}), $\Omega$(1) (Depends on worst case tree structure and worst case key location)
-    - Array-based: O(h) = O($\log{_2}{n}), $\Omega$(1)
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(1) (Depends on worst case tree structure and worst case key location)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(1)
  
 - Adding
-    - List-based: O(h) = O($\log{_2}{n}), $\Omega$($\log{_b}{n})
-    - Array-based: O(h) = O($\log{_2}{n}), $\Omega$($\log{_b}{n})
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$($\log{_b}{n}$)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$($\log{_b}{n}$)
  
 - Removing
-    - List-based: O(h) = O($\log{_2}{n}), $\Omega$($\log{_b}{n}) (Both adding and removing depend on worst case tree structure)
-    - Array-based: O(h) = O($\log{_2}{n}), $\Omega$($\log{_b}{n})
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$($\log{_b}{n}$) (Both adding and removing depend on worst case tree structure)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$($\log{_b}{n}$)
  
 - Recovery (Split and Merge)
     - List-based: O($\log{_2}{n}$), $\Omega$(1) (In the worst case, you have to split and merge all the way back up to the root, best case is when there is no overflow and you don't need to split and merge)
@@ -516,18 +516,18 @@ Ex:
 #### Tree Height Complexity
 
 - Tree Height Complexity 
-    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$
-    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$
+    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
 
 #### Time Complexity
  
 - Adding
-    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$
-    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$)
  
 - Removing
-    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$
-    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$)
 
  #### Space Complexity
  
@@ -565,7 +565,7 @@ Ex:
     - List-based: O(n), $\Omega$(n)
 
 - Storing n nodes and m edges
-    - Matrix-based: O(n^2), $\Omega$(n^2)
+    - Matrix-based: O($n^2$), $\Omega$($n^2$)
     - List-based: O(n + m), $\Omega$(n + m) (n is the number of pointers in the table and m is the number of nodes)
  
 ### Complexity of Search and Sorting on Array
@@ -573,7 +573,7 @@ Ex:
 #### Time Complexity
 
 - Binary Search
-    - O($\log{_2}{n}$
+    - O($\log{_2}{n}$)
     - $\Omega$(1)
 
 - Bubble Sort
@@ -582,7 +582,7 @@ Ex:
 
 - Merge Sort
     - O($n \log{_2}{n}$)
-    - $\Omega$(n \log{_2}{n}$)
+    - $\Omega$($n \log{_2}{n}$)
  
 - Counting Sort
     - O(n + m) (m is the largest key in the array, have to construct two array of size m and both count whether the i-th element is in the array for the first m-sized array and how many elements before the i-th cell are in the first m-size array for the second m-sized array)
@@ -596,7 +596,7 @@ Ex:
  
 - Merge Sort
     - Operating on Lists: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
-    - Operating on Arrays: O(n), $\Omega$(n) (Space complexity of merge phase is O(n) since you create copies of the two halves of the input array that add up to n, the recursive call stack is equal to the height of the decision tree, which is $\log{_2}{n}, so it is O($\log{_2}{n}$). The total complexity is O(n) + O($\log{_2}{n}$) and O(n) dominates so the final space complexity ends up as O(n))
+    - Operating on Arrays: O(n), $\Omega$(n) (Space complexity of merge phase is O(n) since you create copies of the two halves of the input array that add up to n, the recursive call stack is equal to the height of the decision tree, which is $\log{_2}{n}$, so it is O($\log{_2}{n}$). The total complexity is O(n) + O($\log{_2}{n}$) and O(n) dominates so the final space complexity ends up as O(n))
  
 - Counting Sort
     - O(m) (m is the largest key, have to construct two arrays of size m to be able to 1. count how many times the i-th element appears in the input array and 2. count how many elements are in the input array before the i-th cell)
