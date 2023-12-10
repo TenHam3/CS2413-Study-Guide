@@ -434,19 +434,137 @@ Ex:
  #### Time Complexity
 
  - Search
-    - List-based: O($\log{_2}{n}$), $\Omega$(1) (Traverse through the whole height, which is always $\log{_2}{n}$)
-    - Array-based: O($\log{_2}{n}$), $\Omega$(1)
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(1) (Traverse through the whole height, which is always $\log{_2}{n}$)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(1)
   
 - Adding
-    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$) (Have to traverse the entire height to add, then traverse back up to the root to check violations)
-    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$) (Have to traverse the entire height to add, then traverse back up to the root to check violations, even if there are no violations you still have to check all the way back up to the root)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$)
 
 - Removing
-    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
-    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$)
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$)
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$)
  
 #### Space Complexity
 
 - Storing n nodes
     - List-based: O(n), $\Omega$(n)
-    - Array-based: O($n^2$), $\Omega$(n) (Worst case max index is $2^{h + 1} - 1$ where $h < 2 * \log{_2}{n}$. When plugging in $2 * \log{_2}{n}$ into the max index, you get $2n^2 - 1$ which is O(n^2)
+    - Array-based: O($n^2$), $\Omega$($n^2$) (Worst case max index is $2^{h + 1} - 1$ where $h < 2 * \log{_2}{n}$. When plugging in $2 * \log{_2}{n}$ into the max index, you get $2n^2 - 1$ which is O(n^2)
+
+### Red-Black Tree
+
+#### Tree Height Complexity
+
+- Tree Height
+    - List-based: O($\log{_2}{n}), $\Omega$($\log{_2}{n}) 
+    - Array-based: O($\log{_2}{n}), $\Omega$($\log{_2}{n})
+ 
+#### Time Complexity
+
+- Search
+    - List-based: O(h) = O($\log{_2}{n}, $\Omega$(1)
+    - Array-based: O(h) = O($\log{_2}{n}, $\Omega$(1)
+
+- Adding
+    - List-based: O(h) = O($\log{_2}{n}, $\Omega$($\log{_2}{n})
+    - Array-based: O(h) = O($\log{_2}{n}, $\Omega$($\log{_2}{n})
+
+- Removing
+    - List-based: O(h) = O($\log{_2}{n}, $\Omega$($\log{_2}{n})
+    - Array-based: O(h) = O($\log{_2}{n}, $\Omega$($\log{_2}{n})
+
+ #### Space Complexity
+ 
+- Storing n nodes
+    - List-based: O(n), $\Omega$(n) (Similar to AVL tree)
+    - Array-based: O($n^2$), $\Omega$($n^2$)
+ 
+### B-Tree
+
+#### Tree Height Complexity
+
+- Tree Height Complexity (with at most b - 1 keys per node)
+    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_b}{n}$) (Big O is worst case and the lower the base of a logarithmic function the faster it grows) 
+    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_b}{n}$)
+
+#### Time Complexity
+
+- Search
+    - List-based: O(h) = O($\log{_2}{n}), $\Omega$(1) (Depends on worst case tree structure and worst case key location)
+    - Array-based: O(h) = O($\log{_2}{n}), $\Omega$(1)
+ 
+- Adding
+    - List-based: O(h) = O($\log{_2}{n}), $\Omega$($\log{_b}{n})
+    - Array-based: O(h) = O($\log{_2}{n}), $\Omega$($\log{_b}{n})
+ 
+- Removing
+    - List-based: O(h) = O($\log{_2}{n}), $\Omega$($\log{_b}{n}) (Both adding and removing depend on worst case tree structure)
+    - Array-based: O(h) = O($\log{_2}{n}), $\Omega$($\log{_b}{n})
+ 
+- Recovery (Split and Merge)
+    - List-based: O($\log{_2}{n}$), $\Omega$(1) (In the worst case, you have to split and merge all the way back up to the root, best case is when there is no overflow and you don't need to split and merge)
+    - Array-based: O($\log{_2}{n}$), $\Omega$(1)
+
+ #### Space Complexity
+ 
+- Storing n nodes
+    - List-based: O(n), $\Omega$(n)
+    - Array-based: O(n), $\Omega$(n)
+ 
+### Min Heap
+
+#### Tree Height Complexity
+
+- Tree Height Complexity 
+    - List-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$
+    - Array-based: O($\log{_2}{n}$), $\Omega$($\log{_2}{n}$
+
+#### Time Complexity
+ 
+- Adding
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$
+ 
+- Removing
+    - List-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$
+    - Array-based: O(h) = O($\log{_2}{n}$), $\Omega$(h) = $\Omega$($\log{_2}{n}$
+
+ #### Space Complexity
+ 
+- Storing n nodes
+    - List-based: O(n), $\Omega$(n)
+    - Array-based: O(n), $\Omega$(n)
+ 
+### Graph
+
+- For list-based implementation, n is the number of pointers in the table
+- m is the number of node objects (this also equals the number of edges in the graph)
+
+#### Time Complexity
+
+- Finding a Neighbor
+    - Matrix-based: O(1), $\Omega$(1) (Given the origin and destination indices and you just go to that cell in the matrix and see if it has a nonzero edge)
+    - List-based: O(n), $\Omega$(1)
+ 
+- Depth-First Traverse 
+    - Matrix-based: O($n^2$), $\Omega$($n^2$) 
+    - List-based: O(n + m), $\Omega$(n + m)
+ 
+- Breadth-First Traverse
+    - Matrix-based: O($n^2$), $\Omega$($n^2$) 
+    - List-based: O(n + m), $\Omega$(n + m)
+
+ #### Space Complexity
+
+- Depth-First Traverse with Stack based Implementation
+    - Matrix-based: O(n), $\Omega$(n) (Storing a stack of size n for the number of nodes as well as a visited array of size n)
+    - List-based: O(n), $\Omega$(n)
+
+- Breadth-First Traverse with Queue based Implementation
+    - Matrix-based: O(n), $\Omega$(n) (Storing a queue of size n for the number of nodes as well as a visited array of size n)
+    - List-based: O(n), $\Omega$(n)
+
+- Storing n nodes and m edges
+    - Matrix-based: O(n^2), $\Omega$(n^2)
+    - List-based: O(n + m), $\Omega$(n + m) (n is the number of pointers in the table and m is the number of nodes)
+ 
