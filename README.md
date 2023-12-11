@@ -714,6 +714,7 @@ Three Violation Scenarios
     - Right-Left: Parent is right of grandparent and x is left of parent
 - Left-Left: Clockwise rotation of grandparent, then swap colors of grandparent and parent
 - Left-Right: Counterclockwise rotation of parent, then apply LL case
+- For Right-Right and Right-Left, just mirror the cases for Left-Left and Left-Right respectively
 
 ![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/705046f0-c6a5-41d5-b7f0-0b0197f19973)
 
@@ -722,7 +723,55 @@ Three Violation Scenarios
 ### B-Tree
 
 #### Definition
-- 
+- A B-tree is a generalization of a BST with the following properties:
+    - A node can store up to k keys (a node with k keys is called a "k + 1-node")
+    - A node with k keys must have k + 1 children, located between the sorted keys (Nodes between keys a and b are in (a, b))
+    - All leaf nodes have the same depth (This encourages a small height)
 
 #### Key Properties that Guarantee its Big O Height
-- 
+- All leaf nodes having the same depth guarantees the Big O height
+
+#### Know How to Add and Restore (For a 2-3 tree)
+1. Each node can hold up to 2 keys, so we can add key to a 2-node or a child of a 3-node
+2. Adding always starts from a leaf node found by a regular search algorithm (even if there is a regular 2-node on the search path)
+3. If leaf is a 2-node, just add the key to it. If leaf is a 3-node, add the key as its child, which will break the property, and restore the property
+
+Restoration After Adding to a 3-node
+1. The 3-node has no parent (it is the root)
+2. The 3-node has a 2-node parent
+3. The 3-node has a 3-node parent
+
+Case 1: 
+1. Add key to the 3-node
+2. Turn the middle key into 2-node root
+3. Turn other two keys into 2-node children 
+
+Case 2: 
+1. Add key standardly
+2. Split overflowed node
+3. Merge new root into parent
+
+Case 3: 
+1. Add key standardly
+2. Split overflowed node
+3. Merge new root into parent
+4. Repeat steps 2-3 until no violation
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/4bb24e9c-a865-4d2f-a76c-6c9673e027bf)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/2cb64345-4167-4e20-9df9-c2531e058c2c)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/8dc6a548-f7dc-424e-8312-4f3a56e283c7)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/fb72777e-f527-442e-b475-8dc496273e7d)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/56a372be-ef63-4b74-8de6-e1786be7af06)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/2d0834a7-e592-4014-b377-b3d9b86a2e58)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/e3996f0d-a2fd-4540-b79f-2d2cc82bcd6c)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/80c8c646-b0ae-4537-a5e2-090dd61876d7)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/c091ac60-3d24-493f-ac7f-966c51248706)
+
