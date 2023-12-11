@@ -391,7 +391,9 @@ Ex:
     - Separate Chaining that holds nodes: O(n), $\Omega$(n) (Have to store n nodes)
     - Separate Chaining that holds pointers: O(h + n), $\Omega$(max(h, n)) (Have to store h pointers and n nodes, have to add them both together in the complexity because it is ambiguous whether h or n will be bigger)
     - Linear Probing: O(h), $\Omega$(h) (Have to allocate space for the entire table, regardless of whether it is full or not)
- 
+
+## Topics on Complexity
+
 ### Binary Search Tree
 
 #### Tree Height Complexities
@@ -601,3 +603,126 @@ Ex:
 - Counting Sort
     - O(m) (m is the largest key, have to construct two arrays of size m to be able to 1. count how many times the i-th element appears in the input array and 2. count how many elements are in the input array before the i-th cell)
     - $\Omega$(m)
+
+## Topics on Data Structures
+
+### AVL
+
+#### Definition
+- AVL tree is a BST with an extra property that, for any node in the tree, the height of its left subtree and the height of its right subtree differ by at most one
+
+#### Key Properties that Guarantee its Big O Height
+- Consider a BST with n + 1 nodes and assume each subtree of the root is a single child tree. Without AVL property, all n nodes can go to the right subtree resulting in an "n" height tree. With the AVL property, about n/2 nodes can go to the right (so the heights of both the left subtree and the right subtree are about "n/2") resulting in an "n/2" height tree.
+
+#### Rotations
+- Rotations should reduce the height of the taller subtree by 1 while increasing the height of the smaller subtree by 1, thus restoring the AVL property
+- Two rotations
+    - Clockwise Rotation (used if the left subtree is taller)
+    - Counterclockwise Rotation (used if the right subtree is taller)
+Ex: 
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/7a744c4d-d3e2-4959-a11c-84a48b519827)
+
+- Clockwise Rotation Pseudocode (Rotating node x)
+    - **Creating temp variables**
+    - Save x's left child's right child in a temp variable
+    - Save x's parent in another temp variable
+    - **Rebuilding links between x and its left child**
+    - Assign x's left child's right pointer to point at x
+    - Assign x's parent pointer to point at its old left child
+    - **Rebuilding links between x's old left child and x's old parent**
+    - Assign x's left child's parent pointer to x's old parent
+    - Assign x's old parent's left/right pointer to x's left child
+    - **Reconnect x's old left child's right child**
+    - Assign x's left pointer to point at the temp variable that holds x's left child's right child
+
+- Counterclockwise Rotation Pseudocode (Rotating node x)
+    - **Creating temp variables**
+    - Save x's right child's left child in a temp variable
+    - Save x's parent in another temp variable
+    - **Rebuilding links between x and its right child**
+    - Assign x's right child's left pointer to point at x
+    - Assign x's parent pointer to point at its old right child
+    - **Rebuilding links between x's old right child and x's old parent**
+    - Assign x's right child's parent pointer to x's old parent
+    - Assign x's old parent's left/right pointer to x's right child
+    - **Reconnect x's old right child's left child**
+    - Assign x's right pointer to point at the temp variable that holds x's right child's left child
+ 
+#### Know How to Check Violations
+- Check the height of left and right subtrees by calling a function that calculates the height of a given tree on a node's left and right child, then compare their heights
+- After a certain operation (adding or removal), check violations starting at the operated node's parent and working your way up to the root (check violations at the operated node's ancestors)
+- To check height of a tree, initialize a height variable to -1 (to subtract the root's height contribution) and recursively call the height function on the node's left and right child, saving them in integer variables. Then, compare which is bigger and return the maximum of the two subtree heights + 1.
+- The sequence of nodes to check violations is the path of ancestors from where you start all the way up to the root
+    - For adding, you start at the added node's parent
+    - For removal, you start at the deepest hole's parent (will be a leaf node's parent)
+
+#### Know How to Find Max/Min Nodes
+- Max
+    - Keep traversing down the right child path until you are at a leaf node
+- Min
+    - Keep traversing down the left child path until you are at a leaf node
+ 
+#### Know How to Add and Restore
+- Perform regular BST adding
+- Check for violations starting at the newly added node's parent
+- Rotate if a violation is encountered
+
+#### Know How to Remove and Restore
+- Perform regular BST removal
+- Check for violations starting at the deepest hole's parent
+- Rotate if a violation is encountered
+
+#### Violation Scenarios and Restoration Process
+Four Scenarios (Violation occurs at node x)
+- Left-Left: when x is left-heavy and its left child  is left-heavy, do single rotation (Clockwise rotation at node x)
+- Right-Right: when x is right-heavy and its right child is right-heavy, do single rotation (Counterclockwise rotation at node x)
+- Left-Right: when x is left-heavy and its left child is right-heavy, do double rotation (Counterclockwise rotation at x's left child, then clockwise rotation at node x)
+- Right-Left: when x is right-heavy and its right child is left-heavy, do double rotation (Clockwise rotation at x's right child, then counterclockwise rotation at node x)
+
+### Red-Black Tree
+
+#### Definition
+- Red-black tree is a BST with extra properties:
+    - A node is colored either red or black
+    - Root node is black
+    - All leaf nodes are black (NIL)
+    - A red node can only have black children
+    - At each node, all paths to its descendant leaf nodes contain the same number of black nodes
+
+#### Key Properties that Guarantee its Big O Height
+- The property that all paths to any node's descendant leaf nodes contain the same number of black nodes directly encourages a short tree because if we remove all red nodes, it simply requires all leaf nodes to have the same depth (same as B-tree property)
+- "Black-depth" of a leaf node (NIL node) is defined as the number of its black ancestors. In relation to the last property, this means that all leaf nodes have the same black depth
+
+#### Know How to Add and Restore (All Cases) 
+- Perform standard BST adding
+- Color the new node red
+- Check for violations
+
+Three Violation Scenarios
+1. Added node x is root
+- Recolor newly added root as black
+2. Parent is red, uncle is also red
+- Recolor parent and uncle as black, then grandparent as red
+- Check violation at grandparent after recoloring
+3. Parent is red, uncle is black
+- Rotation plus recoloring
+- Rotation depends on four cases: LL, RR, LR, RL
+    - Left-Left: Parent is left of grandparent and x is left of parent
+    - Right-Right: Parent is right of grandparent and x is right of parent
+    - Left-Right: Parent is left of grandparent and x is right of parent
+    - Right-Left: Parent is right of grandparent and x is left of parent
+- Left-Left: Clockwise rotation of grandparent, then swap colors of grandparent and parent
+- Left-Right: Counterclockwise rotation of parent, then apply LL case
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/705046f0-c6a5-41d5-b7f0-0b0197f19973)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/92200567-af08-4250-b34f-bebf77ce95d9)
+
+### B-Tree
+
+#### Definition
+- 
+
+#### Key Properties that Guarantee its Big O Height
+- 
