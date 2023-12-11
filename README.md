@@ -775,3 +775,59 @@ Case 3:
 
 ![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/c091ac60-3d24-493f-ac7f-966c51248706)
 
+#### Know How to Remove and Restore
+Strategy: Always delete a key at a leaf node. If it is not there, keep swapping it with its inorder predecessor/successor until it is swapped to a leaf node (then perform deletion)
+- An inorder predecessor/successor is the key that is visited immediately before/after during the inorder traversal
+Strategy for Deletion at a Leaf Node
+- Case 1: Leaf is a 3-node
+- Case 2: Leaf is a 2-node and both a sibling and parent are 3-nodes
+- Case 3: Leaf is a 2-node and there is no sibling that is a 3-node but parent is
+
+Case 1: Delete the key and the leaf becomes a 2-node
+
+Case 2: Remove the key, fill the hole with the parent key and fill the parent hole with a key in the 3-node sibling
+
+Case 3: Remove the key and merge a key from the parent and a sibling key into the hole
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/337de642-4b69-4912-954b-f5eb94b8e162)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/9d734350-09d7-4128-8e62-79c4c788e81f)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/c8e356f7-32b0-46f2-950d-4560c23673b4)
+
+### Splay
+
+#### Definition
+- Splay tree is a BST with an extra property that every recently accessed node is moved to the root. The process of moving is called splaying. It is essentially a sequence of rotations that are designed in a principled way to make sure the rotated BST remains efficient for search on average case (amortized time)
+
+#### Common Operations That Trigger Splaying
+Three Operations That Trigger Splaying
+- Search (Splay the node that you just searched for)
+- Add (Splay the node that you just added)
+- Remove (Splay the node you want to remove, then delete it, then splay the replacement)
+
+#### Know How Splaying Works
+Six scenarios for splaying node x (Dependent on x, parent, and grandparent)
+1. X only has parent (left child) but not grandparent (L)
+2. X only has parent (right child) but not grandparent (R)
+3. X has both parent and grandparent where X is the left child of the parent and the parent is the left child of the grandparent (LL)
+4. X has both parent and grandparent where X is the right child of the parent and the parent is the right child of the grandparent (RR)
+5. X has both parent and grandparent where X is the left child of the parent and the parent is the right child of the grandparent (LR)
+6. X has both parent and grandparent where X is the right child of the parent and the parent is the left child of the grandparent(RL)
+- Scenarios 2, 4, and 6 are mirrors of 1, 3, and 5 respectively
+
+Scenario 1: Clockwise rotation at the root
+
+Scenario 3: Two clockwise rotations at the grandparent location
+
+Scenario 6: First perform a counterclockwise rotation at the parent and then perform a clockwise rotation at the grandparent 
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/5c194b1c-10d0-4157-a855-30606e237213)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/12bcb371-4cef-4a0c-93d1-fd73894a2f68)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/2973649a-10dc-450f-a090-484b8bfac562)
+
+#### Know That the Amortized Time Complexity of Each Operation is O($\log{_2}{n}$)
+
+![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/e8403ea1-5a83-4ed2-89c6-54b480348eb5)
