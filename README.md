@@ -158,6 +158,7 @@ Example of double hashing:
 
 - To determine the smallest necessary table size for a given hash function, determine the range of the hash function and set your table size to the upper bound of the range + 1
 - The parameter of modulo hashing, which is the divisor, impacts search efficiency, number of collisions, and table size depending on the value of the divisor. If the divisor is large, it requires a larger table size but there are fewer collisions and therefore improves search efficiency. If the divisor is small, it requires a smaller table size but there are more collisions and therefore hinders search efficiency.
+- For double hashing, the second hash function is recommended to be k - (key % k) where k is a prime number that is less than the table size
 
 ## Topic 5: Binary Tree
 
