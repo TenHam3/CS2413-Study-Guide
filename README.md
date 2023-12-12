@@ -832,3 +832,37 @@ Scenario 6: First perform a counterclockwise rotation at the parent and then per
 #### Know That the Amortized Time Complexity of Each Operation is O($\log{_2}{n}$)
 
 ![image](https://github.com/TenHam3/CS2413-Study-Guide/assets/109705811/e8403ea1-5a83-4ed2-89c6-54b480348eb5)
+
+### Min Heap
+
+#### Definition
+
+#### Key Properties That Guarantee its Big O Height
+
+#### Know How to Add and Restore
+
+#### Know How to Remove and Restore
+
+#### Know How Min Heap can be Applied for Sorting
+
+#### Know Definitions of Max Heap, Deap, and Min-Max Heap
+
+### Graph
+
+#### Definition of Degree
+
+#### Know Matrix Representation
+
+#### Know List Representation
+
+#### Know How Depth-First Traverse Works
+
+#### Know How Breadth-First Traverse Works
+
+#### Know How to Find Neighbors in Both Matrix-based and List-based Implementations
+
+#### Know How to Use Stack to Implement Depth-First Traverse
+
+#### Know How to Use Queue to Implement Breadth-First Traverse
+
+#### Know How Dijkstra's Algorithm Works
