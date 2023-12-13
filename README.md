@@ -836,33 +836,94 @@ Scenario 6: First perform a counterclockwise rotation at the parent and then per
 ### Min Heap
 
 #### Definition
+- A heap is a nonlinear tree structure uesd to store prioritized objects in a way that nodes with higher priorities are closer to the root (faster to access).
+
+There are different types of heaps: 
+- Min heap (Main focus)
+- Max heap
+- Deap
+- Min-max heap
 
 #### Key Properties That Guarantee its Big O Height
+- Heaps are complete trees, which means that it guarantees a shortest tree with height $\log{_2}{n}$
+- A heap storing n nodes has height $h = \lfloor \log{n} \rfloor$
 
 #### Know How to Add and Restore
+- Add new node to the next spot in the tree (next available spot in the array, next spot to be printed in BFT)
+- Percolate up until you encounter a smaller parent (for min heap)
 
 #### Know How to Remove and Restore
+- Remove the root
+- Replace the hole with the last node from the tree
+- Percolate that node down until it is smaller than both of its children (or if it is a leaf)
 
 #### Know How Min Heap can be Applied for Sorting
+- For min heap, save the root and remove it (pop will not return the removed node)
+- Put that root in an array (or any other data structure to be sorted) and repeat until the heap is empty
+- This guarantees sorted order because when a node is removed from the heap, the next root is the next smallest value in the heap, meaning that each time a new root is put in place, it will be the next term to be in sorted order out of all the keys in the heap
 
 #### Know Definitions of Max Heap, Deap, and Min-Max Heap
+- Max Heap: Opposite of min heap, root is bigger than all of its descendants
+- Deap: Complete tree where the root is empty and the left subtree of the root is a min heap and the right subtree of the root is a max heap
+    - In both subtrees, nodes at the same position indexed by i satisfy
+          - minH[i] < maxH[i]
+    - This is because the max heap is in the right subtree so all corresponding indices between the min heap and max heap will reflect this property because the max heap nodes are always later on in the level if looking at it through BFT order
+- Min-Max Heap: Complete binary tree with min levels and max levels
+1. Even levels are min levels and odd levels are max levels
+2. At min levels, any node is the smallest node of its subtree
+3. At max levels, any node is the largest node of its subtree
 
 ### Graph
 
 #### Definition of Degree
+Let X be any node
+- Degree is the number of edges with X as the endpoint
+- Incoming degree is the number of edges pointing toward X (X is the destination)
+- Outgoing degree is the number of edges pointing out of X (X is the origin)
 
 #### Know Matrix Representation
+- More time efficiency for some operations
+- Less space efficiency if the graph is sparse
+- Store a graph of n nodes using an n X n matrix "m"
+- m[i][j] = 1 if there is an edge from node i to node j (could be the weight of the edge if weights are included)
+- m[i][j] = 0 otherwise
+- Treat row index as the origin of the edge, column index as the destination
 
 #### Know List Representation
+- Less time efficiency for some operations
+- More space efficiency
+- Store a graph of n nodes using a size n table where nodes connected to node i are on a list at table[i] (Looks like a hash table with separate chaining)
+- Only put outgoing edges in each list for a directed graph
 
 #### Know How Depth-First Traverse Works
+- Begin with any node X
+- Pick an unvisited neighbor of X (randomly) and visit it; repeat this process until the visited node has no unvisited neighbor
+- Push visited nodes to a stack to keep track of which nodes to backtrack to (pop visited nodes off the stack if there are no more unvisited neighbors of the top node)
+- Backtrack to the nearest node with unvisited neighbors and apply Step 2; stop when you backtrack to node X and it has no unvisited neighbors
+- Guaranteed to visit all nodes as long as the graph is "connected"
 
 #### Know How Breadth-First Traverse Works
+- Begin with any node X1
+- Visit all unvisited neighbors of X1 (Let this set of unvisited neighobrs be X2)
+- Visit all unvisited neighbors of X2 (Let this set of unvisited neighbors be X3)
+- Visit all unvisited neighobrs of X3
+- Continue this process until the unvisited neighbor set is empty
+- Push the current set of unvisited neighbors into a queue to keep track of which nodes are in the next unvisited neighbors set
 
 #### Know How to Find Neighbors in Both Matrix-based and List-based Implementations
+Let X be any node at index i for which we are finding neighbors
+- For matrix-based implementation, fix i and iterate through the columns of m to find any edge between X and other nodes in the graph by checking if m[i][j] is nonzero
+- For list-based implementation, go to index i in the table and iterate through the list at that cell
 
 #### Know How to Use Stack to Implement Depth-First Traverse
+- Push visited nodes to a stack to keep track of which nodes to backtrack to when encountering a node with no unvisited neighbors, pop from stack when the top element of the stack has no unvisited neighbors, stop DFT when the stack is empty 
 
 #### Know How to Use Queue to Implement Breadth-First Traverse
+- Push unvisited nodes of the current node to the queue, the front element of the queue will be the next element to be visited and will then push that element's unvisited nodes to the queue, stop BFT when the queue is empty
 
 #### Know How Dijkstra's Algorithm Works
+Start at node X, initialize all shortest times to infinity except for X's, which is 0, and initialize all node's previous node to -1 
+- Update the shortest times from X to its neighbors
+    - Time can either be the value already assigned to it or the weight of the edge from the current node to the neighbor + the shortest time for the current node, pick the smaller value of the two
+- Move to the unvisited node with the shortest time and update its previous node that it came from
+- Repeat this process until the destination node is visited (if calculating the shortest path from node X to another node) or every node has been visited
