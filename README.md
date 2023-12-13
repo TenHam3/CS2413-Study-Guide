@@ -923,7 +923,7 @@ Let X be any node at index i for which we are finding neighbors
 
 #### Know How Dijkstra's Algorithm Works
 Start at node X, initialize all shortest times to infinity except for X's, which is 0, and initialize all node's previous node to -1 
-- Update the shortest times from X to its neighbors
+- Update the shortest times from X to its neighbors and update its previous node that it came from
     - Time can either be the value already assigned to it or the weight of the edge from the current node to the neighbor + the shortest time for the current node, pick the smaller value of the two
-- Move to the unvisited node with the shortest time and update its previous node that it came from
+- Move to the unvisited node with the shortest time
 - Repeat this process until the destination node is visited (if calculating the shortest path from node X to another node) or every node has been visited
