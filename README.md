@@ -452,7 +452,7 @@ Ex:
 
 - Storing n nodes
     - List-based: O(n), $\Omega$(n)
-    - Array-based: O($n^2$), $\Omega$($n^2$) (Worst case max index is $2^{h + 1} - 1$ where $h < 2 * \log{_2}{n}$. When plugging in $2 * \log{_2}{n}$ into the max index, you get $2n^2 - 1$ which is O(n^2)
+    - Array-based: O($n^2$), $\Omega$(n) (Worst case max index is $2^{h + 1} - 1$ where $h < 2 * \log{_2}{n}$. When plugging in $2 * \log{_2}{n}$ into the max index, you get $2n^2 - 1$ which is O(n^2)
 
 ### Red-Black Tree
 
