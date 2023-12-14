@@ -390,7 +390,7 @@ Ex:
 - Storing n nodes
     - Direct Address Table: O(k), $\Omega$(n) (worst-case is when the largest key is bigger than the number of elements, best-case is when the range of the keys is the same as n)
     - Separate Chaining that holds nodes: O(n), $\Omega$(n) (Have to store n nodes)
-    - Separate Chaining that holds pointers: O(h + n), $\Omega$(max(h, n)) (Have to store h pointers and n nodes, have to add them both together in the complexity because it is ambiguous whether h or n will be bigger)
+    - Separate Chaining that holds pointers: O(h + n), $\Omega$(n) (Have to store h pointers and n nodes, have to add them both together in the complexity because it is ambiguous whether h or n will be bigger)
     - Linear Probing: O(h), $\Omega$(h) (Have to allocate space for the entire table, regardless of whether it is full or not)
 
 ## Topics on Complexity
